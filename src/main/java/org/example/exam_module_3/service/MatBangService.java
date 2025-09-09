@@ -46,4 +46,8 @@ public class MatBangService {
     public void deleteMatBang(int id) {
         matBangDAO.deleteById(id);
     }
+
+    public List<MatBang> search(String loai, Double giaTien, Integer tang) {
+        return matBangDAO.search(loai, giaTien, tang);
+    }
 }

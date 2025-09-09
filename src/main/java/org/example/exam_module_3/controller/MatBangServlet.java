@@ -23,18 +23,46 @@ public class MatBangServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        if ("create".equals(action)) {
-            req.getRequestDispatcher("/yeu_cau_1/create.jsp").forward(req, resp);
-        } else if ("delete".equals(action)) {
-            int id = Integer.parseInt(req.getParameter("id"));
-            matBangService.deleteMatBang(id);
-            resp.sendRedirect("/mat-bang-servlet");
-        } else {
-            List<MatBang> list = matBangService.findAll();
-            req.setAttribute("list", list);
-            req.getRequestDispatcher("/yeu_cau_1/list.jsp").forward(req, resp);
+        if (action == null) {
+            action = "";
+        }
+
+        switch (action) {
+            case "create":
+                req.getRequestDispatcher("/yeu_cau_1/create.jsp").forward(req, resp);
+                break;
+            case "delete":
+                int id = Integer.parseInt(req.getParameter("id"));
+                matBangService.deleteMatBang(id);
+                resp.sendRedirect("/mat-bang-servlet");
+                break;
+            case "search":
+                String loai = req.getParameter("loaiMatBang");
+                String giaTienStr = req.getParameter("giaTien");
+                String tangStr = req.getParameter("tang");
+
+                Double giaTien = null;
+                Integer tang = null;
+
+                if (giaTienStr != null && !giaTienStr.isEmpty()) {
+                    giaTien = Double.parseDouble(giaTienStr);
+                }
+                if (tangStr != null && !tangStr.isEmpty()) {
+                    tang = Integer.parseInt(tangStr);
+                }
+
+                List<MatBang> listSearch = matBangService.search(loai, giaTien, tang);
+                req.setAttribute("list", listSearch);
+                req.getRequestDispatcher("/yeu_cau_1/list.jsp").forward(req, resp);
+                break;
+            default:
+                List<MatBang> list = matBangService.findAll();
+                req.setAttribute("list", list);
+                req.getRequestDispatcher("/yeu_cau_1/list.jsp").forward(req, resp);
+                break;
         }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

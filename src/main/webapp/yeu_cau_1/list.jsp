@@ -40,6 +40,7 @@
 
         <div class="col-12 d-flex justify-content-between">
             <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+            <a href="/mat-bang-servlet" class="btn btn-warning">Reset</a>
             <a href="/yeu_cau_1/create.jsp" class="btn btn-success">Thêm mới</a>
         </div>
     </form>
