@@ -11,7 +11,6 @@
 <div class="container mt-5">
     <h2 class="mb-4 text-center">Danh sách mặt bằng</h2>
 
-    <!-- Form tìm kiếm -->
     <form action="/mat-bang-servlet" method="get" class="row g-3 mb-4">
         <input type="hidden" name="action" value="search">
 
@@ -45,7 +44,6 @@
         </div>
     </form>
 
-    <!-- Bảng danh sách -->
     <div class="table-responsive">
         <table class="table table-bordered table-hover align-middle text-center bg-white shadow-sm">
             <thead class="table-dark">

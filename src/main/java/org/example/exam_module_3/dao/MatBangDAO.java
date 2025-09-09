@@ -119,10 +119,12 @@ public class MatBangDAO {
                 ps.setInt(index++, tang);
             }
 
+            System.out.println("Executing SQL: " + ps); // debug
+
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 MatBang mb = new MatBang(
-                        rs.getString("ma_mat_bang"),
+                        rs.getString("ma_mat_bang"),   // đổi nếu cột là maMatBang
                         rs.getDouble("dien_tich"),
                         rs.getString("trang_thai"),
                         rs.getInt("tang"),
@@ -138,6 +140,7 @@ public class MatBangDAO {
         }
         return list;
     }
+
 
     public void deleteById(int id) {
         try (Connection connection = getConnection();
